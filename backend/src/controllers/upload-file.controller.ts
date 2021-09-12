@@ -1,6 +1,6 @@
 
 import {Request, Response} from 'express';
-import { FileModel, Request as RequestDb } from "../models/File";
+import { FileModel, Upload } from "../models/File";
 import { FileService } from "../services/file.service";
 
 export class UploadFileController {
@@ -19,7 +19,7 @@ export class UploadFileController {
 
         if (fileObj){
             console.log("File already exists");
-            await fileObj.updateOne({$inc : {'uploads' : 1}, $push: { 'requests': this.getRequestForDb(req)}});
+            await fileObj.updateOne({$inc : {'numberOfUploads' : 1}, $push: { 'uploads': this.getUploadForDb(req)}});
         }
         else{
             // New file
@@ -35,8 +35,8 @@ export class UploadFileController {
             await FileModel.create({
                 checksum: hash,
                 url: s3Url,
-                requests : [
-                    this.getRequestForDb(req)
+                uploads : [
+                    this.getUploadForDb(req)
                 ]
             });
         }
@@ -45,7 +45,7 @@ export class UploadFileController {
     }
 
 
-    private getRequestForDb(req: Request) : RequestDb {
+    private getUploadForDb(req: Request) : Upload {
         return {
             ipAdress: req.headers['x-forwarded-for']?.toString(),
             userAgent: req.headers['user-agent']?.toString(),

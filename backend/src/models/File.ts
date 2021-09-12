@@ -1,12 +1,12 @@
 import { Schema, model } from 'mongoose';
 
-export interface Request{
+export interface Upload{
     ipAdress?: string;
     createdAt: Date;
     userAgent?: string;
 }
 
-const requestSchema = new Schema<Request>({
+const uploadSchema = new Schema<Upload>({
     ipAdress: String,
     createdAt: { type: Date, default: new Date()},
     userAgent: String
@@ -15,17 +15,17 @@ const requestSchema = new Schema<Request>({
 interface File{
     checksum: string;
     createdAt: Date;
-    uploads: number;
+    numberOfUploads: number;
     url: string;
-    requests: [Request];
+    uploads: [Upload];
 }
 
 const schema = new Schema<File>({
     checksum: { type: String, required: true },
     createdAt: { type: Date, default: new Date()},
-    uploads: { type: Number, default: 1},
+    numberOfUploads: { type: Number, default: 1},
     url: {type: String, required: true},
-    requests: [requestSchema]
+    uploads: [uploadSchema]
 });
 
 export const FileModel = model<File>('File', schema);
