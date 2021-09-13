@@ -17,9 +17,15 @@ const router = promiseRouter();
 app.use(router);
 app.use(cors());
 
+app.get("/", (_: Request, res: Response) =>{
+  res.status(200).send("Test");
+});
+
 app.get("/hi", (_: Request, res: Response) => {
   res.send("Hello world :)");
 });
+
+
 
 app.post(
   "/upload",
