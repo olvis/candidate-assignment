@@ -1,13 +1,13 @@
 import { Schema, model } from 'mongoose';
 
 export interface Upload{
-    ipAdress?: string;
+    ipAddress?: string;
     createdAt: Date;
     userAgent?: string;
 }
 
 const uploadSchema = new Schema<Upload>({
-    ipAdress: String,
+    ipAddress: String,
     createdAt: { type: Date, default: new Date()},
     userAgent: String
 });

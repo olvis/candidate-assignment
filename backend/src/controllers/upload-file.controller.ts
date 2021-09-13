@@ -47,7 +47,7 @@ export class UploadFileController {
 
     private getUploadForDb(req: Request) : Upload {
         return {
-            ipAdress: req.headers['x-forwarded-for']?.toString(),
+            ipAddress: req.headers['x-forwarded-for']?.toString(),
             userAgent: req.headers['user-agent']?.toString(),
             createdAt: new Date()
         };
