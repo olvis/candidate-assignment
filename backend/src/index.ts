@@ -18,30 +18,34 @@ app.use(router);
 app.use(cors());
 
 app.get("/", (_: Request, res: Response) =>{
-  res.status(200).send("Test");
+    res.status(200).send("Test");
 });
 
 app.get("/hi", (_: Request, res: Response) => {
-  res.send("Hello world :)");
+    res.send("Hello world :)");
+});
+
+app.get("/hi2", (_: Request, res: Response) => {
+    res.send("Hello world :). Second endpoint");
 });
 
 
 
 app.post(
-  "/upload",
-  upload.single("file"),
-  async (req: Request, res: Response) => {
-    const controller = new UploadFileController();
-    try {
-      await controller.handle(req, res);
-    } finally {
-      const fileCleaner = new FileCleaner();
-      await fileCleaner.cleanUpFile(req);
+    "/upload",
+    upload.single("file"),
+    async (req: Request, res: Response) => {
+       const controller = new UploadFileController();
+       try {
+           await controller.handle(req, res);
+        } finally {
+            const fileCleaner = new FileCleaner();
+            await fileCleaner.cleanUpFile(req);
+        }
     }
-  }
 );
 
 const port = process.env.PORT;
 app.listen(port, () => {
-  console.log(`Application is listenning on port: ${port}.`);
+    console.log(`Application is listenning on port: ${port}.`);
 });
