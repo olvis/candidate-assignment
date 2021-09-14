@@ -1,4 +1,4 @@
-# Backend Application for the Assigment requested by Malwarebytes
+# Backend Application for the Assignment requested by Malwarebytes
 
 **Author**: Olvis Camacho
 

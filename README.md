@@ -1,4 +1,4 @@
-# Candidate Assigment for Malwarebytes
+# Candidate Assignment for Malwarebytes
 
 **Author**: Olvis Camacho
 
